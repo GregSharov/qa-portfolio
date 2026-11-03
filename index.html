@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>גריגורי שרוב - בודק תוכנה QA</title>
-  <meta name="description" content="קורות חיים ואתר אישי - גריגורי שרוב, בודק תוכנה QA והנדסאי תוכנה בהצטיינות">
-  <meta name="keywords" content="גריגורי שרוב, QA, בודק תוכנה, הנדסאי תוכנה, בדיקות תוכנה">
+  <title id="page-title">גריגורי שרוב - בודק תוכנה QA | אוטומציה ו-AI</title>
+  <meta name="description" content="קורות חיים ואתר אישי - גריגורי שרוב, בודק תוכנה QA, אוטומציה והנדסאי תוכנה בהצטיינות">
+  <meta name="keywords" content="גריגורי שרוב, QA, בודק תוכנה, אוטומציה, Playwright, PyTest, AI, הנדסאי תוכנה">
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
@@ -15,7 +15,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -26,6 +26,70 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Heebo', 'Inter', sans-serif;
+    }
+    html[dir="ltr"] body {
+      font-family: 'Inter', 'Heebo', sans-serif;
+    }
+    .lang-switcher-btn {
+      border: 2px solid var(--accent-color, #0563bb);
+      background-color: transparent;
+      color: var(--default-color, #45505b);
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .lang-switcher-btn:hover {
+      background-color: var(--accent-color, #0563bb);
+      color: #fff;
+    }
+    .skill-tag {
+      display: inline-block;
+      background: rgba(5, 99, 187, 0.08);
+      color: #0563bb;
+      padding: 6px 14px;
+      border-radius: 16px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      margin: 4px;
+      border: 1px solid rgba(5, 99, 187, 0.15);
+    }
+    .project-card, .education-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      height: 100%;
+      border-top: 4px solid #0563bb;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-card:hover, .education-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .contact-item-box {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .contact-item-box i {
+      font-size: 1.5rem;
+      color: #0563bb;
+      background: #eef5ff;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+  </style>
 </head>
 
 <body class="index-page">
@@ -39,22 +103,30 @@
       <nav id="navmenu" class="navmenu">
 
         <div class="profile-img">
-          <img src="assets/img/profile/profile-square-1.webp" alt="גריגורי שרוב" class="img-fluid rounded-circle">
+          <img src="assets/img/profile/profile-square-1.webp" alt="Grigory Sharov" class="img-fluid rounded-circle">
         </div>
 
         <a href="index.html" class="logo d-flex align-items-center justify-content-center active">
-          <h1 class="sitename">גריגורי שרוב</h1>
+          <h1 class="sitename" data-i18n="name">גריגורי שרוב</h1>
         </a>
 
         <ul>
-          <li><a href="#hero">ראשי</a></li>
-          <li><a href="#about">אודות</a></li>
-          <li><a href="#skills">מיומנויות</a></li>
-          <li><a href="#resume">השכלה וניסיון</a></li>
-          <li><a href="#contact">צור קשר</a></li>
+          <li><a href="#hero" data-i18n="nav_home">ראשי</a></li>
+          <li><a href="#about" data-i18n="nav_about">אודות</a></li>
+          <li><a href="#skills" data-i18n="nav_skills">מיומנויות</a></li>
+          <li><a href="#resume" data-i18n="nav_education">הכשרה וניסיון</a></li>
+          <li><a href="#projects" data-i18n="nav_projects">פרויקטים</a></li>
+          <li><a href="#contact" data-i18n="nav_contact">צור קשר</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
+
+      <!-- Language Toggle Button -->
+      <div class="px-3">
+        <button id="lang-toggle" class="lang-switcher-btn" onclick="toggleLanguage()">
+          <i class="bi bi-globe me-1 ms-1"></i> <span id="lang-toggle-text">English</span>
+        </button>
+      </div>
 
     </div>
   </header>
@@ -67,36 +139,38 @@
       <div class="container">
         <div class="row g-0 align-items-center">
 
-          <div class="col-lg-6 hero-content" data-aos="fade-right" data-aos-delay="100">
+          <div class="col-lg-7 hero-content" data-aos="fade-right" data-aos-delay="100">
             <div class="content-wrapper">
-              <h1 class="hero-title">גריגורי שרוב</h1>
-              <h2><span class="typed" data-typed-items="בודק תוכנה QA, הנדסאי תוכנה בהצטיינות, QA Manual & Automation"></span></h2>
-              <p class="lead">בודק תוכנה QA בעל דיפלומת הנדסאי תוכנה בהצטיינות. בעל יכולת למידה גבוהה, עבודה בצוות, ניהול ריבוי משימות ועבודה תחת לחץ.</p>
+              <h1 class="hero-title" data-i18n="hero_title">גריגורי שרוב</h1>
+              <h3 class="mt-2 text-primary fw-bold" data-i18n="hero_subtitle">בודק תוכנה QA | בדיקות ידניות ואוטומציה | התמחות AI</h3>
+              <p class="lead mt-3" data-i18n="hero_desc">
+                הנדסאי תוכנה בהצטיינות ובוגר הקורס Fullstack AI Automation. בעל רקע בפיתוח Fullstack, שליטה במחזור חיי הבדיקות, בניית תשתיות אוטומציה עם Playwright ו-PyTest, בדיקות API ושימוש מתקדם בכלי AI להאצת תהליכי הבדיקה.
+              </p>
 
-              <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
-                <a href="#contact" class="btn btn-primary">צור קשר</a>
-                <a href="#resume" class="btn btn-outline">צפה בהשכלה וניסיון</a>
+              <div class="hero-actions mt-4" data-aos="fade-up" data-aos-delay="300">
+                <a href="#contact" class="btn btn-primary px-4 py-2 me-2 ms-2" data-i18n="hero_btn_contact">צור קשר</a>
+                <a href="#resume" class="btn btn-outline px-4 py-2 me-2 ms-2" data-i18n="hero_btn_resume">צפה בהכשרה וניסיון</a>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-6 hero-image" data-aos="fade-left" data-aos-delay="200">
+          <div class="col-lg-5 hero-image" data-aos="fade-left" data-aos-delay="200">
             <div class="image-container">
               <div class="floating-elements">
                 <div class="floating-card card-1" data-aos="zoom-in" data-aos-delay="300">
-                  <i class="bi bi-check-circle"></i>
-                  <span>QA Testing</span>
+                  <i class="bi bi-robot"></i>
+                  <span>AI Automation</span>
                 </div>
                 <div class="floating-card card-2" data-aos="zoom-in" data-aos-delay="400">
-                  <i class="bi bi-code-slash"></i>
-                  <span>Software Engineering</span>
+                  <i class="bi bi-check-all"></i>
+                  <span>Playwright & PyTest</span>
                 </div>
                 <div class="floating-card card-3" data-aos="zoom-in" data-aos-delay="500">
                   <i class="bi bi-award"></i>
-                  <span>תואר בהצטיינות</span>
+                  <span data-i18n="card_honors">הנדסאי בהצטיינות</span>
                 </div>
               </div>
-              <img src="assets/img/profile/profile-square-1.webp" alt="גריגורי שרוב" class="img-fluid hero-main-image">
+              <img src="assets/img/profile/profile-square-1.webp" alt="Grigory Sharov" class="img-fluid hero-main-image">
               <div class="image-overlay"></div>
             </div>
           </div>
@@ -111,59 +185,49 @@
 
       <!-- Section Title -->
       <div class="container section-title">
-        <h2>תקציר ואודות</h2>
-        <p>בודק תוכנה QA בעל יחסי אנוש מעולים ויכולת הובלת משימות בצורה עצמאית ובצוות</p>
+        <h2 data-i18n="about_title">תקציר מקצועי</h2>
+        <p data-i18n="about_subtitle">רקע מקצועי, ערך מוסף ויכולות אישיות</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row align-items-center">
 
-          <div class="col-lg-5" data-aos="fade-right" data-aos-delay="200">
+          <div class="col-lg-4" data-aos="fade-right" data-aos-delay="200">
             <div class="profile-image-wrapper">
               <div class="profile-image">
-                <img src="assets/img/profile/profile-square-1.webp" alt="גריגורי שרוב" class="img-fluid">
+                <img src="assets/img/profile/profile-square-1.webp" alt="Grigory Sharov" class="img-fluid rounded-3 shadow">
               </div>
             </div>
           </div>
 
-          <div class="col-lg-7" data-aos="fade-left" data-aos-delay="300">
+          <div class="col-lg-8" data-aos="fade-left" data-aos-delay="300">
             <div class="about-content">
               <div class="intro">
-                <h2>שלום, אני גריגורי שרוב - בודק תוכנה QA</h2>
-                <p>בודק תוכנה QA עם יכולת למידה גבוהה, יכולת עבודה בצוות ועבודה כעצמאי, ניהול ריבוי משימות, יכולת עבודה תחת לחץ בשעות לא שגרתיות ויחסי אנוש מצוינים.</p>
+                <h3 class="fw-bold mb-3" data-i18n="about_header">אודות גריגורי שרוב</h3>
+                <p data-i18n="about_text">
+                  הנדסאי תוכנה בהצטיינות ובוגר הקורס Fullstack AI Automation, בעל רקע בפיתוח Fullstack, המחפש משרת בודק תוכנה ידני ואוטומציה. מכיר את מחזור חיי הבדיקות: כתיבת מסמכי STP / STD / STR, בדיקות ידניות, ובניית אוטומציה עם Playwright ו-PyTest לפי Page Object Model. בעל ידע מעשי בבדיקות API ומסדי נתונים, בהרצת בדיקות ב-CI/CD ובשימוש בכלי AI להאצת הבדיקות. לומד מהר, עובד היטב בצוות ובאופן עצמאי, מנהל ריבוי משימות ומוכן לעבודה תחת לחץ ובשעות לא שגרתיות.
+                </p>
               </div>
 
-              <div class="skills-grid">
-                <div class="skill-item" data-aos="zoom-in" data-aos-delay="400">
-                  <div class="skill-icon">
-                    <i class="bi bi-file-earmark-text"></i>
+              <div class="row g-3 mt-3">
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <i class="bi bi-geo-alt-fill text-primary fs-4 me-2 ms-2"></i>
+                    <div>
+                      <strong data-i18n="label_location">מיקום:</strong>
+                      <span data-i18n="val_location">אשקלון</span>
+                    </div>
                   </div>
-                  <h4>מסמכי בדיקות</h4>
-                  <p>כתיבת מסמכי STP, STD, STR ומסמכי אבטחת איכות SRS, VDD</p>
                 </div>
-                <div class="skill-item" data-aos="zoom-in" data-aos-delay="450">
-                  <div class="skill-icon">
-                    <i class="bi bi-diagram-3"></i>
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <i class="bi bi-translate text-primary fs-4 me-2 ms-2"></i>
+                    <div>
+                      <strong data-i18n="label_languages">שפות:</strong>
+                      <span data-i18n="val_languages">עברית (שוטף), אנגלית (שוטף), רוסית (שפת אם)</span>
+                    </div>
                   </div>
-                  <h4>מתודולוגיות פיתוח</h4>
-                  <p>הכרות מעמיקה עם מתודולוגיות בדיקה ופיתוח: Agile, Waterfall, V-Model</p>
-                </div>
-                <div class="skill-item" data-aos="zoom-in" data-aos-delay="500">
-                  <div class="skill-icon">
-                    <i class="bi bi-code-square"></i>
-                  </div>
-                  <h4>שפות וטכנולוגיות</h4>
-                  <p>שליטה בשפות פיתוח, כלי בדיקות אוטומציה ובסיסי תקשורת ורשתות</p>
-                </div>
-              </div>
-
-              <div class="skills-badges mt-4" data-aos="fade-up" data-aos-delay="600">
-                <h4>שפות</h4>
-                <div class="badge-list">
-                  <div class="skill-badge">עברית</div>
-                  <div class="skill-badge">אנגלית</div>
-                  <div class="skill-badge">רוסית</div>
                 </div>
               </div>
 
@@ -177,59 +241,95 @@
     </section><!-- /About Section -->
 
     <!-- Skills Section -->
-    <section id="skills" class="skills section">
+    <section id="skills" class="skills section light-background">
 
       <div class="container section-title">
-        <h2>מיומנויות וטכנולוגיות</h2>
-        <p>ידע וניסיון טכנולוגי נרכש</p>
+        <h2 data-i18n="skills_title">כישורים מקצועיים ומיומנויות</h2>
+        <p data-i18n="skills_subtitle">טכנולוגיות, כלים ומתודולוגיות בדיקה</p>
       </div>
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row g-4">
           
-          <div class="col-md-6" data-aos="flip-left" data-aos-delay="200">
-            <div class="skill-card h-100">
-              <div class="skill-header">
-                <i class="bi bi-bug"></i>
-                <h3>בדיקות תוכנה & QA</h3>
+          <div class="col-lg-6" data-aos="flip-left" data-aos-delay="200">
+            <div class="project-card">
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-cpu text-primary fs-3 me-2 ms-2"></i>
+                <h4 class="mb-0 fw-bold" data-i18n="skill_cat_auto">בדיקות אוטומציה & AI</h4>
               </div>
-              <ul class="list-unstyled mt-3">
-                <li><i class="bi bi-check2-circle text-primary me-2"></i> כתיבת מסמכים: STD, STP, STR</li>
-                <li><i class="bi bi-check2-circle text-primary me-2"></i> מסמכי אבטחת איכות: VDD, SRS</li>
-                <li><i class="bi bi-check2-circle text-primary me-2"></i> מתודולוגיות: Agile, Waterfall, V-Model</li>
-                <li><i class="bi bi-check2-circle text-primary me-2"></i> כלי אוטומציה ובדיקות: Selenium, Postman</li>
-                <li><i class="bi bi-check2-circle text-primary me-2"></i> בדיקות ידניות של אפליקציות Web & Google Apps</li>
-              </ul>
+              <div>
+                <span class="skill-tag">Playwright</span>
+                <span class="skill-tag">PyTest</span>
+                <span class="skill-tag">Page Object Model (POM)</span>
+                <span class="skill-tag">Data Driven Testing</span>
+                <span class="skill-tag">Allure Reports</span>
+                <span class="skill-tag">Alumnium</span>
+                <span class="skill-tag">AI Self Healing</span>
+                <span class="skill-tag">MCP</span>
+                <span class="skill-tag">Vibe Coding / Debugging</span>
+                <span class="skill-tag">OpenAI API</span>
+              </div>
             </div>
           </div>
 
-          <div class="col-md-6" data-aos="flip-left" data-aos-delay="300">
-            <div class="skill-card h-100">
-              <div class="skill-header">
-                <i class="bi bi-code-slash"></i>
-                <h3>שפות פיתוח וספריות</h3>
+          <div class="col-lg-6" data-aos="flip-left" data-aos-delay="300">
+            <div class="project-card">
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-database-check text-primary fs-3 me-2 ms-2"></i>
+                <h4 class="mb-0 fw-bold" data-i18n="skill_cat_api_db">API, DB & Mobile Testing</h4>
               </div>
-              <ul class="list-unstyled mt-3">
-                <li><i class="bi bi-check2-circle text-primary me-2"></i> Web: HTML, CSS, Tailwind CSS, Bootstrap CSS, ReactJS</li>
-                <li><i class="bi bi-check2-circle text-primary me-2"></i> שפות: Java, JavaScript, Python, C, JQuery</li>
-                <li><i class="bi bi-check2-circle text-primary me-2"></i> צד שרת: NodeJS, Express.js</li>
-                <li><i class="bi bi-check2-circle text-primary me-2"></i> בסיסי נתונים: MongoDB, Mongoose, SQL</li>
-                <li><i class="bi bi-check2-circle text-primary me-2"></i> תקשורת ו-AI: Socket IO, WebRTC, PeerJS, OpenAI API</li>
-              </ul>
+              <div>
+                <span class="skill-tag">API Testing</span>
+                <span class="skill-tag">Postman</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">SQLite</span>
+                <span class="skill-tag">MongoDB</span>
+                <span class="skill-tag">Database Testing</span>
+                <span class="skill-tag">Appium (Mobile Testing)</span>
+              </div>
             </div>
           </div>
 
-          <div class="col-md-12" data-aos="flip-left" data-aos-delay="400">
-            <div class="skill-card">
-              <div class="skill-header">
-                <i class="bi bi-network-1"></i>
-                <h3>תקשורת ורשתות</h3>
+          <div class="col-lg-6" data-aos="flip-left" data-aos-delay="400">
+            <div class="project-card">
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-gear-wide-connected text-primary fs-3 me-2 ms-2"></i>
+                <h4 class="mb-0 fw-bold" data-i18n="skill_cat_tools">כלים, CI/CD ומתודולוגיות</h4>
               </div>
-              <div class="mt-3">
-                <span class="badge bg-secondary p-2 m-1">OSI Model</span>
-                <span class="badge bg-secondary p-2 m-1">TCP/IP Model</span>
-                <span class="badge bg-secondary p-2 m-1">בסיסי תקשורת ורשתות</span>
+              <div>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">GitHub</span>
+                <span class="skill-tag">GitHub Actions</span>
+                <span class="skill-tag">Jenkins</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">STP / STD / STR</span>
+                <span class="skill-tag">SRS / VDD</span>
+                <span class="skill-tag">Bug Tracking</span>
+                <span class="skill-tag">Agile</span>
+                <span class="skill-tag">Waterfall</span>
+                <span class="skill-tag">V-Model</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="flip-left" data-aos-delay="500">
+            <div class="project-card">
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-code-slash text-primary fs-3 me-2 ms-2"></i>
+                <h4 class="mb-0 fw-bold" data-i18n="skill_cat_dev">שפות פיתוח ורשתות</h4>
+              </div>
+              <div>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">C</span>
+                <span class="skill-tag">HTML5 & CSS3</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Express.js</span>
+                <span class="skill-tag">OSI Model</span>
+                <span class="skill-tag">TCP/IP Protocol</span>
               </div>
             </div>
           </div>
@@ -240,93 +340,170 @@
 
     </section><!-- /Skills Section -->
 
-    <!-- Resume Section -->
+    <!-- Resume / Education Section -->
     <section id="resume" class="resume section">
 
       <!-- Section Title -->
       <div class="container section-title">
-        <h2>השכלה וניסיון</h2>
-        <p>רקע אקדמי וידע מעשי</p>
+        <h2 data-i18n="edu_title">הכשרה מקצועית והשכלה</h2>
+        <p data-i18n="edu_subtitle">מסלולי הלימוד וההסמכות האקדמיות</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row">
-          <div class="col-lg-12" data-aos="fade-right" data-aos-delay="200">
-            <div class="education-section">
-              <div class="section-header">
-                <h2><i class="bi bi-mortarboard"></i> השכלה אקדמית</h2>
-              </div>
-
-              <div class="education-timeline">
-                <div class="timeline-track"></div>
-
-                <div class="education-item" data-aos="slide-up" data-aos-delay="300">
-                  <div class="timeline-marker"></div>
-                  <div class="education-content">
-                    <div class="degree-header">
-                      <h3>הנדסאי תוכנה - בהצטיינות</h3>
-                      <span class="year">2022 – 2025</span>
-                    </div>
-                    <h4 class="institution">המכללה האקדמית אשקלון (ממוצע 91)</h4>
-                    <p>בעל דיפלומת תואר הנדסאי תוכנה בהצטיינות (מס׳ דיפלומה: 342627).</p>
-                    
-                    <h5 class="mt-3 fs-6 fw-bold">ידע וניסיון נרכשו בזמן הלימודים:</h5>
-                    <ul>
-                      <li>בדיקות ידניות של אפליקציות (MS Word, MS Power Point, Web App, Google Gmail).</li>
-                      <li>כתיבת מסמכי בדיקות תוכנה: STP, STD, STR.</li>
-                      <li>כתיבת מסמכי אבטחת איכות תוכנה: SRS, VDD.</li>
-                      <li>הכרות מעמיקה עם מתודולוגיות בדיקה ופיתוח: Agile, V-Model, Waterfall.</li>
-                      <li>הכרות ושימוש בכלי אוטומציה ובדיקות: Selenium, Postman.</li>
-                      <li>פיתוח בשלל שפות וטכנולוגיות: HTML, CSS, ReactJS, Java, JavaScript, Python, C, NodeJS, Express.js, MongoDB, SQL, Socket IO, WebRTC, OpenAI API.</li>
-                      <li>הכרות עם בסיסי תקשורת ורשתות (OSI Model, TCP/IP Model).</li>
-                    </ul>
-                  </div>
-                </div>
-
-              </div>
+        <div class="row g-4">
+          
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="education-card">
+              <span class="badge bg-primary mb-2">06/2026 – 11/2026</span>
+              <h4 class="fw-bold" data-i18n="edu_course1_title">Fullstack AI Automation</h4>
+              <h6 class="text-secondary fw-semibold mb-3" data-i18n="edu_course1_inst">המכללה "עתיד האוטומציה"</h6>
+              <ul class="lh-lg text-muted">
+                <li data-i18n="edu_c1_l1">בניית בדיקות אוטומטיות עם Playwright ו-PyTest בשפת Python, לפי תבנית Page Object Model (POM) ועקרונות Data Driven Testing.</li>
+                <li data-i18n="edu_c1_l2">הפקת דוחות מתקדמים עם Allure, ניהול קוד ב-Git ו-GitHub, והרצה אוטומטית ב-CI/CD באמצעות GitHub Actions ו-Jenkins עם Docker.</li>
+                <li data-i18n="edu_c1_l3">בדיקות API, בדיקות מסדי נתונים (SQL/MongoDB) ובדיקות מובייל באמצעות Appium.</li>
+                <li data-i18n="edu_c1_l4">שימוש בכלים וטכנולוגיות AI בבדיקות: Alumnium, AI Self Healing, MCP ו-Vibe Coding / Debugging.</li>
+              </ul>
             </div>
           </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="education-card">
+              <span class="badge bg-success mb-2">2022 – 2025</span>
+              <h4 class="fw-bold" data-i18n="edu_degree_title">הנדסאי תוכנה (בהצטיינות)</h4>
+              <h6 class="text-secondary fw-semibold mb-3" data-i18n="edu_degree_inst">המכללה האקדמית אשקלון (ממוצע 91)</h6>
+              <ul class="lh-lg text-muted">
+                <li data-i18n="edu_d1_l1">לימודי תואר הנדסאי תוכנה בהצטיינות יתרה.</li>
+                <li data-i18n="edu_d1_l2">בדיקות ידניות של אפליקציות וכתיבת מסמכי בדיקות ואבטחת איכות: STP, STD, STR, SRS, VDD.</li>
+                <li data-i18n="edu_d1_l3">היכרות מעמיקה עם מתודולוגיות בדיקה ופיתוח: Agile, Waterfall, V-Model.</li>
+                <li data-i18n="edu_d1_l4">לימוד שפות פיתוח (Java, C, Python, JS, React, Node.js) ותקשורת מחשבים (OSI, TCP/IP).</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
 
       </div>
 
     </section><!-- /Resume Section -->
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact section light-background">
+    <!-- Projects Section -->
+    <section id="projects" class="portfolio section light-background">
 
       <!-- Section Title -->
       <div class="container section-title">
-        <h2>צור קשר</h2>
-        <p>נשארים בלחיצת כפתור</p>
+        <h2 data-i18n="proj_title">פרויקטים וניסיון מעשי</h2>
+        <p data-i18n="proj_subtitle">עבודות מעשיות בתחום הבדיקות והפיתוח</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row g-4">
+
+          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="project-card">
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-file-earmark-check text-primary fs-2 me-2 ms-2"></i>
+                <div>
+                  <h4 class="fw-bold mb-0" data-i18n="proj1_title">תיעוד בדיקות ידניות ל-Gmail</h4>
+                  <small class="text-muted" data-i18n="proj1_subtitle">Manual QA Documentation</small>
+                </div>
+              </div>
+              <p class="text-muted" data-i18n="proj1_desc">
+                כתיבה מקיפה של תרחישי בדיקה (Test Cases), מסמכי אפיון בדיקות ותיעוד באגים מלא עבור אפליקציית Gmail. המסמכים נכתבו לפי סטנדרטי STP, STD ו-STR.
+              </p>
+              <div>
+                <span class="skill-tag">STP / STD / STR</span>
+                <span class="skill-tag">Manual Testing</span>
+                <span class="skill-tag">Bug Reporting</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="project-card">
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-code-square text-primary fs-2 me-2 ms-2"></i>
+                <div>
+                  <h4 class="fw-bold mb-0" data-i18n="proj2_title">פיתוח Fullstack ובדיקות מערכת</h4>
+                  <small class="text-muted" data-i18n="proj2_subtitle">Fullstack & Web Applications</small>
+                </div>
+              </div>
+              <p class="text-muted" data-i18n="proj2_desc">
+                פיתוח אפליקציות מורכבות במהלך הלימודים תוך שימוש ב-React, Node.js, Express, MongoDB, Socket.IO, WebRTC ו-OpenAI API. הבנה מעמיקה של קוד המקור המסייעת באיתור באגים מדויק ובתכנון תרחישי בדיקה איכותיים.
+              </p>
+              <div>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">MongoDB</span>
+                <span class="skill-tag">Socket.IO</span>
+                <span class="skill-tag">OpenAI API</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Projects Section -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <!-- Section Title -->
+      <div class="container section-title">
+        <h2 data-i18n="contact_title">צור קשר</h2>
+        <p data-i18n="contact_subtitle">נשארים בלחיצת כפתור</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row g-4 justify-content-center">
-          <div class="col-lg-6">
-            <div class="info-box" data-aos="fade-up" data-aos-delay="200">
-              <h3>פרטי התקשרות</h3>
+          <div class="col-lg-8">
+            <div class="project-card p-4">
+              <div class="row g-4">
+                
+                <div class="col-md-6">
+                  <div class="contact-item-box">
+                    <i class="bi bi-telephone-fill"></i>
+                    <div>
+                      <h6 class="fw-bold mb-1" data-i18n="contact_phone">טלפון</h6>
+                      <p class="mb-0 text-muted" dir="ltr">050-2219630</p>
+                    </div>
+                  </div>
+                </div>
 
-              <div class="info-item" data-aos="fade-up" data-aos-delay="400">
-                <div class="icon-box">
-                  <i class="bi bi-telephone"></i>
+                <div class="col-md-6">
+                  <div class="contact-item-box">
+                    <i class="bi bi-envelope-fill"></i>
+                    <div>
+                      <h6 class="fw-bold mb-1" data-i18n="contact_email">אימייל</h6>
+                      <p class="mb-0 text-muted">grigorysharov@icloud.com</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="content">
-                  <h4>טלפון</h4>
-                  <p dir="ltr" class="text-end">050-2219630</p>
-                </div>
-              </div>
 
-              <div class="info-item" data-aos="fade-up" data-aos-delay="500">
-                <div class="icon-box">
-                  <i class="bi bi-envelope"></i>
+                <div class="col-md-6">
+                  <div class="contact-item-box">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <div>
+                      <h6 class="fw-bold mb-1" data-i18n="contact_location">אזור מגורים</h6>
+                      <p class="mb-0 text-muted" data-i18n="val_location">אשקלון</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="content">
-                  <h4>אימייל</h4>
-                  <p>grigorysharov@icloud.com</p>
+
+                <div class="col-md-6">
+                  <div class="contact-item-box">
+                    <i class="bi bi-person-check-fill"></i>
+                    <div>
+                      <h6 class="fw-bold mb-1" data-i18n="contact_status">סטטוס</h6>
+                      <p class="mb-0 text-muted" data-i18n="contact_status_val">זמין למשרת QA ידני / אוטומציה</p>
+                    </div>
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -338,11 +515,11 @@
 
   </main>
 
-  <footer id="footer" class="footer dark-background">
+  <footer id="footer" class="footer dark-background py-4">
 
     <div class="container">
-      <div class="copyright text-center ">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">גריגורי שרוב</strong> <span>All Rights Reserved</span></p>
+      <div class="copyright text-center">
+        <p>© <span id="year">2026</span> <strong class="px-1 sitename" data-i18n="name">גריגורי שרוב</strong> | <span data-i18n="footer_rights">כל הזכויות שמורות</span></p>
       </div>
     </div>
 
@@ -350,6 +527,173 @@
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Translation Data & Language Switching Logic -->
+  <script>
+    const translations = {
+      he: {
+        page_title: "גריגורי שרוב - בודק תוכנה QA | אוטומציה ו-AI",
+        name: "גריגורי שרוב",
+        nav_home: "ראשי",
+        nav_about: "אודות",
+        nav_skills: "מיומנויות",
+        nav_education: "הכשרה וניסיון",
+        nav_projects: "פרויקטים",
+        nav_contact: "צור קשר",
+
+        hero_title: "גריגורי שרוב",
+        hero_subtitle: "בודק תוכנה QA | בדיקות ידניות ואוטומציה | התמחות AI",
+        hero_desc: "הנדסאי תוכנה בהצטיינות ובוגר הקורס Fullstack AI Automation. בעל רקע בפיתוח Fullstack, שליטה במחזור חיי הבדיקות, בניית תשתיות אוטומציה עם Playwright ו-PyTest, בדיקות API ושימוש מתקדם בכלי AI להאצת תהליכי הבדיקה.",
+        hero_btn_contact: "צור קשר",
+        hero_btn_resume: "צפה בהכשרה וניסיון",
+        card_honors: "הנדסאי בהצטיינות",
+
+        about_title: "תקציר מקצועי",
+        about_subtitle: "רקע מקצועי, ערך מוסף ויכולות אישיות",
+        about_header: "אודות גריגורי שרוב",
+        about_text: "הנדסאי תוכנה בהצטיינות ובוגר הקורס Fullstack AI Automation, בעל רקע בפיתוח Fullstack, המחפש משרת בודק תוכנה ידני ואוטומציה. מכיר את מחזור חיי הבדיקות: כתיבת מסמכי STP / STD / STR, בדיקות ידניות, ובניית אוטומציה עם Playwright ו-PyTest לפי Page Object Model. בעל ידע מעשי בבדיקות API ומסדי נתונים, בהרצת בדיקות ב-CI/CD ובשימוש בכלי AI להאצת הבדיקות. לומד מהר, עובד היטב בצוות ובאופן עצמאי, מנהל ריבוי משימות ומוכן לעבודה תחת לחץ ובשעות לא שגרתיות.",
+        label_location: "מיקום:",
+        val_location: "אשקלון",
+        label_languages: "שפות:",
+        val_languages: "עברית (שוטף), אנגלית (שוטף), רוסית (שפת אם)",
+
+        skills_title: "כישורים מקצועיים ומיומנויות",
+        skills_subtitle: "טכנולוגיות, כלים ומתודולוגיות בדיקה",
+        skill_cat_auto: "בדיקות אוטומציה & AI",
+        skill_cat_api_db: "API, DB & Mobile Testing",
+        skill_cat_tools: "כלים, CI/CD ומתודולוגיות",
+        skill_cat_dev: "שפות פיתוח ורשתות",
+
+        edu_title: "הכשרה מקצועית והשכלה",
+        edu_subtitle: "מסלולי הלימוד וההסמכות האקדמיות",
+        edu_course1_title: "Fullstack AI Automation",
+        edu_course1_inst: "המכללה \"עתיד האוטומציה\"",
+        edu_c1_l1: "בניית בדיקות אוטומטיות עם Playwright ו-PyTest בשפת Python, לפי תבנית Page Object Model (POM) ועקרונות Data Driven Testing.",
+        edu_c1_l2: "הפקת דוחות מתקדמים עם Allure, ניהול קוד ב-Git ו-GitHub, והרצה אוטומטית ב-CI/CD באמצעות GitHub Actions ו-Jenkins עם Docker.",
+        edu_c1_l3: "בדיקות API, בדיקות מסדי נתונים (SQL/MongoDB) ובדיקות מובייל באמצעות Appium.",
+        edu_c1_l4: "שימוש בכלים וטכנולוגיות AI בבדיקות: Alumnium, AI Self Healing, MCP ו-Vibe Coding / Debugging.",
+
+        edu_degree_title: "הנדסאי תוכנה (בהצטיינות)",
+        edu_degree_inst: "המכללה האקדמית אשקלון (ממוצע 91)",
+        edu_d1_l1: "לימודי תואר הנדסאי תוכנה בהצטיינות יתרה.",
+        edu_d1_l2: "בדיקות ידניות של אפליקציות וכתיבת מסמכי בדיקות ואבטחת איכות: STP, STD, STR, SRS, VDD.",
+        edu_d1_l3: "היכרות מעמיקה עם מתודולוגיות בדיקה ופיתוח: Agile, Waterfall, V-Model.",
+        edu_d1_l4: "לימוד שפות פיתוח (Java, C, Python, JS, React, Node.js) ותקשורת מחשבים (OSI, TCP/IP).",
+
+        proj_title: "פרויקטים וניסיון מעשי",
+        proj_subtitle: "עבודות מעשיות בתחום הבדיקות והפיתוח",
+        proj1_title: "תיעוד בדיקות ידניות ל-Gmail",
+        proj1_subtitle: "Manual QA Documentation",
+        proj1_desc: "כתיבה מקיפה של תרחישי בדיקה (Test Cases), מסמכי אפיון בדיקות ותיעוד באגים מלא עבור אפליקציית Gmail. המסמכים נכתבו לפי סטנדרטי STP, STD ו-STR.",
+        proj2_title: "פיתוח Fullstack ובדיקות מערכת",
+        proj2_subtitle: "Fullstack & Web Applications",
+        proj2_desc: "פיתוח אפליקציות מורכבות במהלך הלימודים תוך שימוש ב-React, Node.js, Express, MongoDB, Socket.IO, WebRTC ו-OpenAI API. הבנה מעמיקה של קוד המקור המסייעת באיתור באגים מדויק ובתכנון תרחישי בדיקה איכותיים.",
+
+        contact_title: "צור קשר",
+        contact_subtitle: "נשארים בלחיצת כפתור",
+        contact_phone: "טלפון",
+        contact_email: "אימייל",
+        contact_location: "אזור מגורים",
+        contact_status: "סטטוס",
+        contact_status_val: "זמין למשרת QA ידני / אוטומציה",
+        footer_rights: "כל הזכויות שמורות"
+      },
+      en: {
+        page_title: "Grigory Sharov - QA Engineer | Automation & AI",
+        name: "Grigory Sharov",
+        nav_home: "Home",
+        nav_about: "About",
+        nav_skills: "Skills",
+        nav_education: "Education",
+        nav_projects: "Projects",
+        nav_contact: "Contact",
+
+        hero_title: "Grigory Sharov",
+        hero_subtitle: "QA Automation & Manual Engineer | AI Testing Specialist",
+        hero_desc: "Software Engineering Associate (Honors) and Fullstack AI Automation graduate. Experienced in full QA lifecycle, test automation with Playwright and PyTest, API testing, and leveraging AI tools for accelerated software testing.",
+        hero_btn_contact: "Contact Me",
+        hero_btn_resume: "View Resume",
+        card_honors: "Honors Graduate",
+
+        about_title: "Executive Summary",
+        about_subtitle: "Professional background, expertise, and skills",
+        about_header: "About Grigory Sharov",
+        about_text: "Software Engineering Associate (Honors) and graduate of Fullstack AI Automation course with background in Fullstack development, seeking a QA Manual & Automation Engineer position. Experienced in full QA lifecycle: writing STP / STD / STR documents, manual testing, and building automation suites using Playwright and PyTest following Page Object Model (POM). Practical experience in API & Database testing, CI/CD execution, and AI tools for accelerated testing. Fast learner, strong team player & independent worker, skilled in multi-tasking under pressure.",
+        label_location: "Location:",
+        val_location: "Ashkelon",
+        label_languages: "Languages:",
+        val_languages: "Hebrew (Fluent), English (Fluent), Russian (Native)",
+
+        skills_title: "Technical Skills",
+        skills_subtitle: "Testing methodologies, automation frameworks & tools",
+        skill_cat_auto: "Automation & AI-Driven Testing",
+        skill_cat_api_db: "API, Database & Mobile Testing",
+        skill_cat_tools: "Tools, CI/CD & Methodologies",
+        skill_cat_dev: "Programming Languages & Networking",
+
+        edu_title: "Professional Education",
+        edu_subtitle: "Academic degrees and certified training courses",
+        edu_course1_title: "Fullstack AI Automation",
+        edu_course1_inst: "\"Automation Future\" College",
+        edu_c1_l1: "Building automated test suites with Playwright & PyTest in Python following Page Object Model (POM) and Data Driven Testing principles.",
+        edu_c1_l2: "Generating Allure test reports, Git & GitHub version control, and executing automated CI/CD pipelines via GitHub Actions and Jenkins with Docker.",
+        edu_c1_l3: "API testing, Database testing (SQL/MongoDB), and Mobile automation testing using Appium.",
+        edu_c1_l4: "Applying AI testing tools & methodologies: Alumnium, AI Self Healing, MCP, and Vibe Coding / Debugging.",
+
+        edu_degree_title: "Software Engineer (Honors)",
+        edu_degree_inst: "Ashkelon Academic College (GPA: 91)",
+        edu_d1_l1: "Graduated with High Honors in Software Engineering.",
+        edu_d1_l2: "Manual application testing and writing QA documentation: STP, STD, STR, SRS, VDD.",
+        edu_d1_l3: "Deep understanding of software development lifecycle & methodologies: Agile, Waterfall, V-Model.",
+        edu_d1_l4: "Programming languages (Java, C, Python, JS, React, Node.js) and Computer Networking (OSI, TCP/IP).",
+
+        proj_title: "Projects & Practical Experience",
+        proj_subtitle: "Hands-on projects in QA testing and software development",
+        proj1_title: "Manual QA Documentation for Gmail",
+        proj1_subtitle: "Manual QA Documentation",
+        proj1_desc: "Comprehensive creation of Test Cases, Test Plan specifications, and bug reporting documentation for Gmail application based on STP, STD, and STR standards.",
+        proj2_title: "Fullstack Development & System Testing",
+        proj2_subtitle: "Fullstack & Web Applications",
+        proj2_desc: "Developed fullstack web applications during academic studies using React, Node.js, Express, MongoDB, Socket.IO, WebRTC, and OpenAI API. Deep code comprehension enables precise bug detection and high-coverage test suite design.",
+
+        contact_title: "Contact Details",
+        contact_subtitle: "Get in touch directly",
+        contact_phone: "Phone",
+        contact_email: "Email",
+        contact_location: "Location",
+        contact_status: "Status",
+        contact_status_val: "Available for Manual / Automation QA positions",
+        footer_rights: "All Rights Reserved"
+      }
+    };
+
+    let currentLang = 'he';
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'he' ? 'en' : 'he';
+      applyLanguage(currentLang);
+    }
+
+    function applyLanguage(lang) {
+      const htmlElem = document.documentElement;
+      htmlElem.setAttribute('lang', lang);
+      htmlElem.setAttribute('dir', lang === 'he' ? 'rtl' : 'ltr');
+
+      // Update toggle button text
+      document.getElementById('lang-toggle-text').innerText = lang === 'he' ? 'English' : 'עברית';
+
+      // Update all translatable elements
+      document.querySelectorAll('[data-i18n]').forEach(elem => {
+        const key = elem.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          elem.innerText = translations[lang][key];
+        }
+      });
+
+      // Update document page title
+      document.title = translations[lang]['page_title'];
+    }
+  </script>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
